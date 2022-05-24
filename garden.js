@@ -14,19 +14,32 @@ const getTotalYield = ({ crops }) => {
     return count
 }
 
-// const getTotalYield = function(plant){
-    // for(let i in plant){
-    //     return plant[i]
-    //     const yieldplant = plant[i].numCrops * plant[i].crop.yield
-    //     const yieldplant1 = plant[i].numCrops * plant[i].crop.yield
-    //     const yieldplant2 = plant[1].numCrops * plant[1].crop.yield
-    //     console.log(yieldplant1 + yieldplant2)
-    //     return yieldplant1 + yieldplant2
-    // }
-// }
+const getCostForCrop = (plant) => {
+    return getYieldForCrop(plant) * plant.crop.cost
+}
+
+const getRevenueForCrop = (plant) => {
+    return getYieldForCrop(plant) * plant.crop.saleprice
+}
+
+const getProfitForCrop = (plant) => {
+    return getRevenueForCrop(plant) - getCostForCrop(plant)
+}
+
+const getTotalProfit = ({ crops }) => {
+    let count = 0
+    for(let c in crops) {
+        count += getProfitForCrop(crops[c])
+    }
+    return count
+}
 
 module.exports = {
     getYieldForPlant, 
     getYieldForCrop, 
-    getTotalYield
+    getTotalYield,
+    getCostForCrop,
+    getRevenueForCrop,
+    getProfitForCrop,
+    getTotalProfit
   };
